@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>إسلام سامح — مبرمج</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Cairo:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0d1f;--surface:#1a1736;--line:#2f2a5c;--text:#ece9ff;--muted:#a5a0cf;
+  --a:#7cf7e4;--b:#ff5fa8;--c:#8b6cff;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+:root:not([data-theme="dark"]){}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){--bg:#f6f4ff;--surface:#ffffff;--line:#d9d3f7;--text:#1b1740;--muted:#5b5690;--a:#0a8f80;--b:#d1307f;--c:#5a3fd6}
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Cairo",Tahoma,"Segoe UI",sans-serif;line-height:1.9;overflow-x:hidden}
+.glow{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(40rem 30rem at 85% 5%,color-mix(in srgb,var(--c) 45%,transparent),transparent 70%),
+             radial-gradient(35rem 28rem at 5% 60%,color-mix(in srgb,var(--b) 30%,transparent),transparent 70%);
+  animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(-3%,2%,0) scale(1.08)}}
+h1,h2,h3{font-family:"Reem Kufi",Tahoma,sans-serif;line-height:1.25;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--a);outline-offset:3px;border-radius:6px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+nav{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+nav .logo{font-family:"Reem Kufi",sans-serif;font-weight:700;font-size:1.3rem;text-decoration:none}
+nav ul{display:flex;gap:1.4rem;list-style:none;margin:0;padding:0}
+nav ul a{text-decoration:none;color:var(--muted)}
+nav ul a:hover{color:var(--a)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:2.5rem;align-items:center;min-height:78vh;padding:2rem 0}
+.hero h1{font-size:clamp(3rem,10vw,6.5rem);font-weight:700;
+  background:linear-gradient(100deg,var(--a),var(--c) 50%,var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.2rem;color:var(--muted);max-width:30rem;margin:1rem 0 1.6rem}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.7rem 1.5rem;border-radius:999px;text-decoration:none;font-weight:600;border:2px solid var(--line);transition:transform .2s,border-color .2s}
+.btn:hover{transform:translateY(-3px);border-color:var(--a)}
+.btn.main{background:linear-gradient(100deg,var(--c),var(--b));border-color:transparent;color:#fff}
+.term{direction:ltr;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 60px -25px color-mix(in srgb,var(--c) 70%,transparent);overflow:hidden}
+.term .bar{display:flex;gap:.4rem;padding:.7rem 1rem;border-bottom:1px solid var(--line)}
+.term .bar i{width:.7rem;height:.7rem;border-radius:50%;background:var(--line)}
+.term .bar i:nth-child(1){background:var(--b)}.term .bar i:nth-child(2){background:var(--c)}.term .bar i:nth-child(3){background:var(--a)}
+.term pre{margin:0;padding:1.2rem;min-height:14rem;font:500 .95rem/1.7 ui-monospace,Consolas,Menlo,monospace;color:var(--text);white-space:pre-wrap}
+.term .k{color:var(--b)}.term .s{color:var(--a)}.term .f{color:var(--c)}
+.caret{display:inline-block;width:.5rem;height:1.1em;background:var(--a);vertical-align:-.2em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+section{padding:4.5rem 0}
+h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem}
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:2.5rem}
+.about p{margin:0 0 1rem;color:var(--muted);font-size:1.1rem;max-width:40rem}
+.skills{display:flex;flex-wrap:wrap;gap:.6rem;align-content:flex-start}
+.skills span{padding:.35rem 1rem;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.works{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,24rem));gap:1.2rem}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.5rem;display:flex;flex-direction:column;gap:.7rem;transition:transform .25s,border-color .25s}
+.work:hover{transform:translateY(-6px);border-color:var(--b)}
+.work:nth-child(2){border-radius:18px 40px 18px 40px}
+.work h3{font-size:1.5rem}
+.work p{margin:0;color:var(--muted)}
+.tags{margin-top:auto;display:flex;gap:.5rem;flex-wrap:wrap;direction:ltr;font-size:.85rem;color:var(--a)}
+.contact{text-align:center}
+.contact p{color:var(--muted);font-size:1.15rem;margin:0 auto 1.6rem;max-width:32rem}
+.contact .btns{justify-content:center}
+footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid var(--line)}
+nav{gap:1rem}
+#lang{font:600 .95rem "Cairo","Space Grotesk",sans-serif;color:var(--text);background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:.3rem 1rem;cursor:pointer;transition:border-color .2s}
+#lang:hover{border-color:var(--a)}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3,html[lang="en"] .logo{font-family:"Space Grotesk",Tahoma,sans-serif}
+html[lang="en"] body{font-family:"Space Grotesk","Cairo",Tahoma,sans-serif}
+html[lang="en"] .hero h1{font-size:clamp(2.8rem,9vw,5.5rem)}
+@media (max-width:760px){
+  .hero,.about{grid-template-columns:1fr}
+  .hero{min-height:auto}
+  nav ul{gap:.9rem;font-size:.95rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#top">إسلام سامح</a>
+    <ul>
+      <li><a href="#about">نبذة عني</a></li>
+      <li><a href="#works">أعمالي</a></li>
+      <li><a href="#contact">تواصل معي</a></li>
+    </ul>
+    <button id="lang" type="button" aria-label="Switch language">EN</button>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <h1>إسلام سامح</h1>
+      <p>مبرمج بحوّل الأفكار لمواقع وتطبيقات شغّالة بجد، سريعة وسهلة الاستخدام.</p>
+      <div class="btns">
+        <a class="btn main" href="#works">شوف أعمالي</a>
+        <a class="btn" href="#contact">كلمني</a>
+      </div>
+    </div>
+    <div class="term" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <pre id="code"></pre>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>نبذة عني</h2>
+    <div class="about">
+      <div>
+        <p>أنا إسلام سامح، مبرمج بحب أبني حاجات مفيدة وأحلّ مشاكل حقيقية بالكود. بهتم بالتفاصيل الصغيرة اللي بتفرق في تجربة المستخدم، وبحب أتعلم أدوات جديدة طول الوقت.</p>
+        <p>سواء محتاج موقع، تطبيق، أو أداة تسهّل شغلك، أقدر أساعدك تطلّعها بشكل نضيف وسريع.</p>
+      </div>
+      <div class="skills" aria-label="المهارات">
+        <span>JavaScript</span><span>Python</span><span>HTML &amp; CSS</span><span>React</span><span>Node.js</span><span>Git</span><span>SQL</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <h2>أعمالي</h2>
+    <div class="works">
+      <article class="work">
+        <h3>بوت أولى ثانوي</h3>
+        <p>بوت تليجرام لطلاب أولى ثانوي، تفتحه وتستخدمه في أي وقت من موبايلك.</p>
+        <a class="btn main" style="align-self:flex-start" href="https://t.me/Islamsamehbot?start=ref_7148990368" target="_blank" rel="noopener">افتح البوت</a>
+        <div class="tags"><span>Telegram Bot</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>تواصل معي</h2>
+    <p>عندك فكرة أو مشروع؟ ابعتلي وهنشوف نعمله إزاي.</p>
+    <div class="btns">
+      <a class="btn main" href="mailto:i04450169@gmail.com">ابعتلي إيميل</a>
+      <a class="btn" href="https://wa.me/201201850306" target="_blank" rel="noopener">كلمني على واتساب</a>
+    </div>
+  </section>
+
+  <footer>© 2026 إسلام سامح</footer>
+</div>
+
+<script>
+(function(){
+  var el=document.getElementById('code');
+  var lines=[
+    '<span class="k">const</span> dev = {',
+    '  name: <span class="s">"Islam Sameh"</span>,',
+    '  role: <span class="s">"Programmer"</span>,',
+    '  loves: [<span class="s">"clean code"</span>, <span class="s">"coffee"</span>],',
+    '};',
+    '',
+    '<span class="f">dev</span>.build(<span class="s">"something great"</span>);'
+  ];
+  var html=lines.join('\n');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var caret='<span class="caret"></span>';
+  if(reduce){el.innerHTML=html+caret;return;}
+  var i=0;
+  function tick(){
+    // advance through text, skipping over tags in one step
+    while(i<html.length&&html[i]==='<'){i=html.indexOf('>',i)+1;}
+    i++;
+    el.innerHTML=html.slice(0,i)+caret;
+    if(i<html.length){setTimeout(tick,38);}
+  }
+  setTimeout(tick,500);
+})();
+(function(){
+  var D=/[\u064B-\u0652]/g;
+  function n(s){return s.replace(D,'').replace(/\s+/g,' ').trim();}
+  var raw={
+    'نبذة عني':'About',
+    'أعمالي':'Work',
+    'تواصل معي':'Contact',
+    'إسلام سامح':'Islam Sameh',
+    'مبرمج بحوّل الأفكار لمواقع وتطبيقات شغّالة بجد، سريعة وسهلة الاستخدام.':'A programmer who turns ideas into real, fast, easy-to-use websites and apps.',
+    'شوف أعمالي':'See my work',
+    'كلمني':'Talk to me',
+    'أنا إسلام سامح، مبرمج بحب أبني حاجات مفيدة وأحلّ مشاكل حقيقية بالكود. بهتم بالتفاصيل الصغيرة اللي بتفرق في تجربة المستخدم، وبحب أتعلم أدوات جديدة طول الوقت.':'I’m Islam Sameh, a programmer who loves building useful things and solving real problems with code. I care about the small details that shape the user experience, and I’m always learning new tools.',
+    'سواء محتاج موقع، تطبيق، أو أداة تسهّل شغلك، أقدر أساعدك تطلّعها بشكل نضيف وسريع.':'Whether you need a website, an app, or a tool that makes your work easier, I can help you ship it clean and fast.',
+    'بوت أولى ثانوي':'First-Year Secondary Bot',
+    'بوت تليجرام لطلاب أولى ثانوي، تفتحه وتستخدمه في أي وقت من موبايلك.':'A Telegram bot for first-year secondary students. Open it and use it anytime from your phone.',
+    'افتح البوت':'Open the bot',
+    'عندك فكرة أو مشروع؟ ابعتلي وهنشوف نعمله إزاي.':'Got an idea or a project? Message me and we’ll work out how to build it.',
+    'ابعتلي إيميل':'Email me',
+    'كلمني على واتساب':'Chat on WhatsApp',
+    '© 2026 إسلام سامح':'© 2026 Islam Sameh'
+  };
+  var M={};Object.keys(raw).forEach(function(k){M[n(k)]=raw[k];});
+  var btn=document.getElementById('lang');
+  var titles={ar:'إسلام سامح — مبرمج',en:'Islam Sameh — Programmer'};
+  function nodes(){
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),out=[],t;
+    while((t=w.nextNode())){
+      var p=t.parentNode;
+      if(!t.nodeValue.trim()||p.closest('script,style,pre,#lang'))continue;
+      out.push(t);
+    }
+    return out;
+  }
+  function apply(lang){
+    nodes().forEach(function(t){
+      if(t._ar===undefined)t._ar=t.nodeValue;
+      var en=M[n(t._ar)];
+      if(lang==='en'&&en){
+        var a=t._ar.match(/^\s*/)[0],b=t._ar.match(/\s*$/)[0];
+        t.nodeValue=a+en+b;
+      }else{t.nodeValue=t._ar;}
+    });
+    var h=document.documentElement;
+    h.lang=lang;h.dir=lang==='en'?'ltr':'rtl';
+    document.title=titles[lang];
+    btn.textContent=lang==='en'?'عربي':'EN';
+    try{localStorage.setItem('lang',lang);}catch(e){}
+  }
+  btn.addEventListener('click',function(){
+    apply(document.documentElement.lang==='en'?'ar':'en');
+  });
+  var saved=null;
+  try{saved=localStorage.getItem('lang');}catch(e){}
+  if(saved==='en')apply('en');
+})();
+</script>
+</body>
+</html>

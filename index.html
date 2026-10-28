@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>إسلام سامح — مبرمج</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Cairo:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0f0d1f;--surface:#1a1736;--line:#2f2a5c;--text:#ece9ff;--muted:#a5a0cf;
@@ -66,6 +66,12 @@ h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:1.5rem}
 .contact p{color:var(--muted);font-size:1.15rem;margin:0 auto 1.6rem;max-width:32rem}
 .contact .btns{justify-content:center}
 footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid var(--line)}
+nav{gap:1rem}
+#lang{font:600 .95rem "Cairo","Space Grotesk",sans-serif;color:var(--text);background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:.3rem 1rem;cursor:pointer;transition:border-color .2s}
+#lang:hover{border-color:var(--a)}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3,html[lang="en"] .logo{font-family:"Space Grotesk",Tahoma,sans-serif}
+html[lang="en"] body{font-family:"Space Grotesk","Cairo",Tahoma,sans-serif}
+html[lang="en"] .hero h1{font-size:clamp(2.8rem,9vw,5.5rem)}
 @media (max-width:760px){
   .hero,.about{grid-template-columns:1fr}
   .hero{min-height:auto}
@@ -84,6 +90,7 @@ footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid 
       <li><a href="#works">أعمالي</a></li>
       <li><a href="#contact">تواصل معي</a></li>
     </ul>
+    <button id="lang" type="button" aria-label="Switch language">EN</button>
   </nav>
 
   <header class="hero" id="top">
@@ -163,6 +170,61 @@ footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid 
     if(i<html.length){setTimeout(tick,38);}
   }
   setTimeout(tick,500);
+})();
+(function(){
+  var D=/[\u064B-\u0652]/g;
+  function n(s){return s.replace(D,'').replace(/\s+/g,' ').trim();}
+  var raw={
+    'نبذة عني':'About',
+    'أعمالي':'Work',
+    'تواصل معي':'Contact',
+    'إسلام سامح':'Islam Sameh',
+    'مبرمج بحوّل الأفكار لمواقع وتطبيقات شغّالة بجد، سريعة وسهلة الاستخدام.':'A programmer who turns ideas into real, fast, easy-to-use websites and apps.',
+    'شوف أعمالي':'See my work',
+    'كلمني':'Talk to me',
+    'أنا إسلام سامح، مبرمج بحب أبني حاجات مفيدة وأحلّ مشاكل حقيقية بالكود. بهتم بالتفاصيل الصغيرة اللي بتفرق في تجربة المستخدم، وبحب أتعلم أدوات جديدة طول الوقت.':'I’m Islam Sameh, a programmer who loves building useful things and solving real problems with code. I care about the small details that shape the user experience, and I’m always learning new tools.',
+    'سواء محتاج موقع، تطبيق، أو أداة تسهّل شغلك، أقدر أساعدك تطلّعها بشكل نضيف وسريع.':'Whether you need a website, an app, or a tool that makes your work easier, I can help you ship it clean and fast.',
+    'بوت أولى ثانوي':'First-Year Secondary Bot',
+    'بوت تليجرام لطلاب أولى ثانوي، تفتحه وتستخدمه في أي وقت من موبايلك.':'A Telegram bot for first-year secondary students. Open it and use it anytime from your phone.',
+    'افتح البوت':'Open the bot',
+    'عندك فكرة أو مشروع؟ ابعتلي وهنشوف نعمله إزاي.':'Got an idea or a project? Message me and we’ll work out how to build it.',
+    'ابعتلي إيميل':'Email me',
+    'كلمني على واتساب':'Chat on WhatsApp',
+    '© 2026 إسلام سامح':'© 2026 Islam Sameh'
+  };
+  var M={};Object.keys(raw).forEach(function(k){M[n(k)]=raw[k];});
+  var btn=document.getElementById('lang');
+  var titles={ar:'إسلام سامح — مبرمج',en:'Islam Sameh — Programmer'};
+  function nodes(){
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),out=[],t;
+    while((t=w.nextNode())){
+      var p=t.parentNode;
+      if(!t.nodeValue.trim()||p.closest('script,style,pre,#lang'))continue;
+      out.push(t);
+    }
+    return out;
+  }
+  function apply(lang){
+    nodes().forEach(function(t){
+      if(t._ar===undefined)t._ar=t.nodeValue;
+      var en=M[n(t._ar)];
+      if(lang==='en'&&en){
+        var a=t._ar.match(/^\s*/)[0],b=t._ar.match(/\s*$/)[0];
+        t.nodeValue=a+en+b;
+      }else{t.nodeValue=t._ar;}
+    });
+    var h=document.documentElement;
+    h.lang=lang;h.dir=lang==='en'?'ltr':'rtl';
+    document.title=titles[lang];
+    btn.textContent=lang==='en'?'عربي':'EN';
+    try{localStorage.setItem('lang',lang);}catch(e){}
+  }
+  btn.addEventListener('click',function(){
+    apply(document.documentElement.lang==='en'?'ar':'en');
+  });
+  var saved=null;
+  try{saved=localStorage.getItem('lang');}catch(e){}
+  if(saved==='en')apply('en');
 })();
 </script>
 </body>
